@@ -1,29 +1,23 @@
 # Eco-Classify
 
-AI-powered waste classification platform — React + Tailwind frontend, Flask
-REST API backend, MongoDB persistence, ML-based image and text classification.
+An AI-powered waste classification platform that helps people figure out how to properly dispose of and recycle their waste. Upload a photo or describe an item in text, and it tells you the category, how to dispose of it, and what its environmental impact looks like.
 
-## What's real vs. what's a placeholder (read this first)
+Built with React + Tailwind on the frontend, Flask on the backend, MongoDB for storage, and PyTorch for the image classification model.
 
-This is a fully working, runnable full-stack system — every API actually
-works, the frontend actually calls them, the DB layer actually persists
-data. Be upfront about this if you present it:
+## What it does
 
-- **Real:** Flask REST API with 4 working endpoints, MongoDB integration,
-  React SPA with routing, image classification using a real pretrained
-  MobileNetV2 CNN doing real inference, rule-based text classifier,
-  environmental impact aggregation pipeline.
-- **Placeholder (documented in code):** the image model maps ImageNet's
-  1000 general classes to our 6 waste categories via keyword lookup,
-  instead of using a CNN *fine-tuned specifically on waste images*. A real
-  fine-tuned model needs a labeled dataset (TrashNet is the standard
-  one, ~5k images, 6 classes) and GPU training time. The architecture is
-  built so swapping this in later is a single function change — see the
-  docstring in `backend/models/image_classifier.py`.
+- Upload an image of waste and get it classified into one of 6 categories: plastic, paper, glass, metal, organic, or e-waste
+- Type a description instead (e.g. "broken phone charger") and get the same classification
+- **See the environmental impact** of everything you've classified — carbon saved, energy saved, waste diverted
+- **Find nearby recycling centers** based on category and location
+- **Learn page** with quick reference info on how to handle each waste category
 
-This distinction is honestly your strongest interview/viva story:
-"I built the full production architecture and used transfer learning as a
-working baseline; here's exactly how I'd swap in a fine-tuned head."
+## Tech stack
+
+Frontend: React, Tailwind CSS, Vite
+Backend: Flask (Python), REST APIs
+Database: MongoDB
+ML: PyTorch, MobileNetV2 (pretrained on ImageNet, used as a transfer-learning backbone for image classification)
 
 ## Project structure
 
@@ -40,18 +34,17 @@ eco-classify/
 │   └── database/db.py    MongoDB connection layer
 ```
 
-## Running it
+## Running it locally
 
 ### Backend
 ```bash
 cd backend
-python -m venv venv && source venv/bin/activate   # Windows: venv\Scripts\activate
+python -m venv venv
+venv\Scripts\activate          # Windows
 pip install -r requirements.txt
-# requires a local MongoDB running on localhost:27017
-# (or set MONGO_URI env var to a MongoDB Atlas connection string)
 python app.py
 ```
-Backend runs on `http://localhost:5000`.
+Runs on `http://localhost:5000`. Needs a MongoDB connection — either local MongoDB or a MongoDB Atlas connection string set as `MONGO_URI` in a `.env` file.
 
 ### Frontend
 ```bash
@@ -59,20 +52,24 @@ cd frontend
 npm install
 npm run dev
 ```
-Frontend runs on `http://localhost:5173`.
+Runs on `http://localhost:5173`.
 
-## API reference
+## API endpoints
 
-| Method | Endpoint | Body | Returns |
-|---|---|---|---|
-| POST | `/predict-image` | multipart `image` file | category, confidence, material_type, disposal_instructions, material_composition |
-| POST | `/predict-text` | `{"description": "..."}` | category, recycling_method |
-| GET | `/impact` | — | aggregated carbon/energy/waste totals |
-| GET | `/centers` | `?lat=&lng=&category=` | nearby recycling centers, sorted by distance |
+| Method | Endpoint | What it does |
+|---|---|---|
+| POST | `/predict-image` | Classify a waste image |
+| POST | `/predict-text` | Classify a text description |
+| GET | `/impact` | Get aggregated environmental impact stats |
+| GET | `/centers` | Find nearby recycling centers |
 
-## Next steps to make this resume-gold
+## Notes on the ML model
 
-1. Fine-tune a real classifier on TrashNet and swap into `image_classifier.py`.
-2. Add user auth so `/impact` is personalized rather than global.
-3. Deploy: Render/Railway for Flask, Vercel for the frontend, MongoDB Atlas for the DB.
-4. Add tests (`pytest` for backend routes, React Testing Library for frontend).
+The image classifier uses a MobileNetV2 model pretrained on ImageNet, with its predictions mapped to my 6 waste categories. I didn't have access to a labeled waste-image dataset to fully fine-tune the model for this specific task, so this is a transfer-learning baseline rather than a model trained end-to-end on waste images. Fine-tuning on a dataset like TrashNet is the natural next step.
+
+## What's next
+
+- Fine-tune the image model on a real waste dataset
+- Add user accounts so impact stats are personalized
+- Deploy the backend and frontend properly (Render/Vercel/Atlas)
+- Add tests
