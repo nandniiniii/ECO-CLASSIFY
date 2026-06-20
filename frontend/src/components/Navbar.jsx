@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import Logo from "./Logo.jsx";
 
 const links = [
   { to: "/", label: "Classify" },
@@ -10,7 +11,7 @@ export default function Navbar() {
   return (
     <nav className="border-b border-white/10 sticky top-0 bg-background/90 backdrop-blur z-10">
       <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
-        <span className="text-accent font-bold tracking-tight text-lg">eco-classify</span>
+        <Logo size={36} />
         <div className="flex gap-6 text-sm">
           {links.map((l) => (
             <NavLink

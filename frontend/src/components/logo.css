@@ -1,0 +1,59 @@
+.eco-logo-wrap {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.eco-logo-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.eco-logo-body {
+  transform-origin: 85px 55px;
+  transition: transform 0.35s ease;
+}
+
+.eco-logo-aperture {
+  transform-origin: 0 0;
+  transition: stroke-dashoffset 0.3s ease;
+  animation: eco-spin-slow 8s linear infinite;
+}
+
+.eco-logo-leaf {
+  transform-origin: 140px 8px;
+  transition: transform 0.35s ease;
+  animation: eco-sway 3.4s ease-in-out infinite;
+}
+
+.eco-logo-lens-group {
+  transition: transform 0.3s ease;
+}
+
+@keyframes eco-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes eco-sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(4deg); }
+}
+
+.eco-logo-wrap:hover .eco-logo-body {
+  transform: scale(1.04) rotate(-1deg);
+}
+
+.eco-logo-wrap:hover .eco-logo-aperture {
+  animation-duration: 1.6s;
+}
+
+.eco-logo-wrap:hover .eco-logo-lens-group {
+  transform: scale(1.08);
+}
+
+.eco-logo-wrap:hover .eco-logo-leaf {
+  animation-duration: 0.8s;
+  transform: scale(1.12);
+}
