@@ -1,3 +1,4 @@
+
 """
 app.py - Eco-Classify backend entrypoint.
 
@@ -6,6 +7,10 @@ Run:
     python app.py
 Server starts on http://localhost:5000
 """
+import os
+from dotenv import load_dotenv
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+
 from flask import Flask, jsonify
 from flask_cors import CORS
 
