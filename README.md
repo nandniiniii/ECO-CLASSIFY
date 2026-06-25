@@ -32,18 +32,18 @@ MobileNetV2 (pretrained on ImageNet, used as a transfer-learning backbone for im
 
 ## Project structure
 
-
-eco-classify/
-├── frontend/        React + Tailwind SPA
+''
+eco-classify
+├── frontend--->        React + Tailwind SPA
 │   └── src/
 │       ├── components/   Navbar, ResultCard
 │       └── pages/        Classify, Impact, Learn
-├── backend/
+├── backend-->
 │   ├── app.py            Flask entrypoint
 │   ├── apis/              4 blueprint route files
 │   ├── models/            4 ML/heuristic models
 │   └── database/db.py    MongoDB connection layer
-
+''
 
 ## API endpoints
 
@@ -52,7 +52,6 @@ eco-classify/
 | POST | `/predict-image` | Classify a waste image |
 | POST | `/predict-text` | Classify a text description |
 | GET | `/impact` | Get aggregated environmental impact stats |
-| GET | `/centers` | Find nearby recycling centers |
 
 
 ## What's next
