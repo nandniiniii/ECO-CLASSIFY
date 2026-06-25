@@ -1,4 +1,4 @@
-import "./logo.css";
+﻿import "./Logo.css";
 
 export default function Logo({ size = 44 }) {
   return (
