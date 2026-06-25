@@ -17,10 +17,18 @@ Built with React + Tailwind on the frontend, Flask on the backend, MongoDB for s
 
 ## Tech stack
 
-Frontend: React, Tailwind CSS, Vite
-Backend: Flask (Python), REST APIs
-Database: MongoDB
-ML: PyTorch, MobileNetV2 (pretrained on ImageNet, used as a transfer-learning backbone for image classification)
+**Frontend**: 
+React
+Tailwind CSS
+Vite
+**Backend**:
+Flask (Python)
+REST APIs
+**Database**:
+MongoDB
+**ML**:
+PyTorch
+MobileNetV2 (pretrained on ImageNet, used as a transfer-learning backbone for image classification)
 
 ## Project structure
 
