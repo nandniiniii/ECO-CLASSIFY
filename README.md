@@ -1,4 +1,6 @@
 *Live demo:* https://eco-classify-delta.vercel.app
+
+
 Eco-Classiffy--->
 
 An AI-powered waste classification platform that helps people figure out how to properly dispose of and recycle their waste. Upload a photo or describe an item in text, and it tells you the category, how to dispose of it, and what its environmental impact looks like.
