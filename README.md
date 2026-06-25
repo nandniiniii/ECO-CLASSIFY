@@ -32,7 +32,7 @@ MobileNetV2 (pretrained on ImageNet, used as a transfer-learning backbone for im
 
 ## Project structure
 
-```
+
 eco-classify/
 ├── frontend/        React + Tailwind SPA
 │   └── src/
@@ -43,7 +43,7 @@ eco-classify/
 │   ├── apis/              4 blueprint route files
 │   ├── models/            4 ML/heuristic models
 │   └── database/db.py    MongoDB connection layer
-``
+
 
 ## API endpoints
 
