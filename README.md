@@ -32,27 +32,7 @@ eco-classify/
 │   ├── apis/              4 blueprint route files
 │   ├── models/            4 ML/heuristic models
 │   └── database/db.py    MongoDB connection layer
-```
-
-## Running it locally
-
-### Backend
-```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate          # Windows
-pip install -r requirements.txt
-python app.py
-```
-Runs on `http://localhost:5000`. Needs a MongoDB connection — either local MongoDB or a MongoDB Atlas connection string set as `MONGO_URI` in a `.env` file.
-
-### Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-Runs on `http://localhost:5173`.
+``
 
 ## API endpoints
 
@@ -63,9 +43,6 @@ Runs on `http://localhost:5173`.
 | GET | `/impact` | Get aggregated environmental impact stats |
 | GET | `/centers` | Find nearby recycling centers |
 
-## Notes on the ML model
-
-The image classifier uses a MobileNetV2 model pretrained on ImageNet, with its predictions mapped to my 6 waste categories. I didn't have access to a labeled waste-image dataset to fully fine-tune the model for this specific task, so this is a transfer-learning baseline rather than a model trained end-to-end on waste images. Fine-tuning on a dataset like TrashNet is the natural next step.
 
 ## What's next
 
