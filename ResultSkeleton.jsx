@@ -1,7 +1,6 @@
 ﻿import { useRef, useState } from "react";
 import { predictImage, predictText } from "../api.js";
 import ResultCard from "../components/ResultCard.jsx";
-import ResultSkeleton from "../components/ResultSkeleton.jsx";
 
 const TABS = ["Upload Image", "Scan Camera", "Search Text"];
 
@@ -30,7 +29,6 @@ export default function ClassifyPage() {
   const [text, setText] = useState("");
   const videoRef = useRef(null);
   const classifyRef = useRef(null);
-  const resultRef = useRef(null);
 
   async function handleFile(file) {
     if (!file) return;
@@ -38,7 +36,6 @@ export default function ClassifyPage() {
     setError("");
     setLoading(true);
     setResult(null);
-    setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
     try {
       const data = await predictImage(file);
       setResult(data);
@@ -76,7 +73,6 @@ export default function ClassifyPage() {
     setError("");
     setLoading(true);
     setResult(null);
-    setTimeout(() => resultRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 100);
     try {
       const data = await predictText(text);
       setResult(data);
@@ -207,11 +203,14 @@ export default function ClassifyPage() {
           </form>
         )}
 
-        <div ref={resultRef}>
-          {loading && <ResultSkeleton />}
-          {error && <p className="text-red-400 text-sm">{error}</p>}
-          {!loading && <ResultCard result={result} />}
-        </div>
+        {loading && (
+          <div className="flex items-center gap-2 text-white/50 text-sm">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            Classifying...
+          </div>
+        )}
+        {error && <p className="text-red-400 text-sm">{error}</p>}
+        <ResultCard result={result} />
       </div>
     </div>
   );

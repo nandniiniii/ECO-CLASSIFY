@@ -1,19 +1,26 @@
-import os
+﻿import os
 from pymongo import MongoClient
 from datetime import datetime
 
-MONGO_URI = "mongodb+srv://nandniisingh18_db_user:LKrJjCno3envZ06v@cluster0.lysxtzv.mongodb.net/"
-DB_NAME = "eco_classify"
+_env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", ".env")
+if os.path.exists(_env_path):
+    with open(_env_path) as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, val = line.split("=", 1)
+                os.environ[key.strip()] = val.strip()
+
+MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017")
+DB_NAME = os.getenv("DB_NAME", "eco_classify")
 
 _client = None
-
 
 def get_db():
     global _client
     if _client is None:
         _client = MongoClient(MONGO_URI, serverSelectionTimeoutMS=5000)
     return _client[DB_NAME]
-
 
 def log_prediction(category: str, source: str, confidence: float = None):
     db = get_db()
@@ -23,7 +30,6 @@ def log_prediction(category: str, source: str, confidence: float = None):
         "confidence": confidence,
         "timestamp": datetime.utcnow(),
     })
-
 
 def seed_recycling_centers():
     db = get_db()

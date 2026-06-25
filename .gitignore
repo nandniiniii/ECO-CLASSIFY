@@ -13,4 +13,3 @@ dist/
 # OS junk
 .DS_Store
 Thumbs.db
-backend/database/db.py
