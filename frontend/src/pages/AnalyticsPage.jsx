@@ -106,10 +106,6 @@ export default function AnalyticsPage() {
             </RadarChart>
           </ResponsiveContainer>
         </div>
-
-        <p className="text-xs text-white/30 border-t border-white/10 pt-4">
-          The text classifier uses rule-based keyword scoring, not a trained neural network. These metrics measure how well its keyword rules generalize to held-out test phrases. Run <code className="text-accent">python evaluation/evaluate.py</code> to regenerate.
-        </p>
       </div>
     </div>
   );
