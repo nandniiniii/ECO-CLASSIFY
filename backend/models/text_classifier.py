@@ -1,16 +1,3 @@
-"""
-models/text_classifier.py
-
-Rule-based + keyword-scoring text classifier for waste descriptions
-(e.g. "broken laptop charger", "banana peel", "plastic milk jug").
-
-This is a legitimate, explainable baseline (TF-IDF-style keyword scoring)
-and is genuinely useful in production as a fast fallback even after you
-add an ML model. To upgrade: swap `classify_text` internals for a
-scikit-learn TfidfVectorizer + LogisticRegression pipeline trained on a
-labeled waste-description dataset; keep the same return contract.
-"""
-
 RECYCLING_METHODS = {
     "plastic": "Mechanical recycling - clean, sort by resin code, send to a plastics recycler.",
     "paper": "Pulping and re-sheeting at a paper recycling mill.",
@@ -21,17 +8,40 @@ RECYCLING_METHODS = {
 }
 
 _KEYWORDS = {
-    "plastic": ["plastic", "bottle", "wrapper", "bag", "polythene", "container", "straw", "jug", "packet"],
-    "paper": ["paper", "newspaper", "cardboard", "carton", "box", "notebook", "magazine", "envelope"],
-    "glass": ["glass", "jar", "bottle of wine", "mirror", "windowpane"],
-    "metal": ["metal", "can", "tin", "aluminium", "aluminum", "foil", "scrap", "wire", "nail"],
-    "organic": ["food", "peel", "vegetable", "fruit", "leftover", "leaf", "compost", "banana", "rotten"],
-    "e-waste": ["phone", "charger", "laptop", "battery", "circuit", "wire", "electronic", "tv", "computer", "cable", "mouse", "keyboard"],
+    "plastic": ["plastic", "wrapper", "bag", "polythene", "container", "straw", "jug", "packet", "sachet", "tray", "foam", "styrofoam"],
+    "paper": ["paper", "newspaper", "cardboard", "carton", "box", "notebook", "magazine", "envelope", "tissue", "receipt"],
+    "glass": ["glass", "jar", "wine bottle", "beer bottle", "mirror", "windowpane", "vase", "tumbler", "drinking glass", "broken glass"],
+    "metal": ["metal", "can", "tin", "aluminium", "aluminum", "foil", "scrap", "wire", "nail", "steel", "copper", "iron"],
+    "organic": ["food", "peel", "vegetable", "fruit", "leftover", "leaf", "compost", "banana", "rotten", "apple", "core", "seed", "eggshell", "coffee", "tea", "garden", "grass"],
+    "e-waste": ["phone", "charger", "laptop", "battery", "circuit", "electronic", "tv", "computer", "cable", "mouse", "keyboard", "remote", "remote control", "dead remote", "tablet", "monitor", "printer", "camera", "headphone", "earphone"],
 }
+
+_PRIORITY_PHRASES = [
+    ("wine bottle", "glass"),
+    ("beer bottle", "glass"),
+    ("glass bottle", "glass"),
+    ("drinking glass", "glass"),
+    ("broken glass", "glass"),
+    ("plastic bottle", "plastic"),
+    ("water bottle", "plastic"),
+    ("remote control", "e-waste"),
+    ("dead remote", "e-waste"),
+    ("apple core", "organic"),
+    ("fruit peel", "organic"),
+    ("vegetable peel", "organic"),
+]
 
 
 def classify_text(description: str) -> dict:
     text = description.lower()
+
+    for phrase, category in _PRIORITY_PHRASES:
+        if phrase in text:
+            return {
+                "category": category,
+                "recycling_method": RECYCLING_METHODS[category],
+            }
+
     scores = {cat: 0 for cat in _KEYWORDS}
     for category, words in _KEYWORDS.items():
         for w in words:
@@ -40,7 +50,7 @@ def classify_text(description: str) -> dict:
 
     best_category = max(scores, key=scores.get)
     if scores[best_category] == 0:
-        best_category = "plastic"  # fallback when no keyword hits
+        best_category = "plastic"
 
     return {
         "category": best_category,

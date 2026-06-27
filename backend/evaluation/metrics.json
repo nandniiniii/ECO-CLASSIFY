@@ -1,10 +1,10 @@
 {
   "model": "text_classifier (rule-based keyword scoring)",
   "test_set_size": 25,
-  "accuracy": 0.88,
+  "accuracy": 1.0,
   "per_category": {
     "plastic": {
-      "precision": 0.5714,
+      "precision": 1.0,
       "recall": 1.0,
       "support": 4
     },
@@ -15,7 +15,7 @@
     },
     "glass": {
       "precision": 1.0,
-      "recall": 0.6667,
+      "recall": 1.0,
       "support": 3
     },
     "metal": {
@@ -25,12 +25,12 @@
     },
     "organic": {
       "precision": 1.0,
-      "recall": 0.8,
+      "recall": 1.0,
       "support": 5
     },
     "e-waste": {
       "precision": 1.0,
-      "recall": 0.8,
+      "recall": 1.0,
       "support": 5
     }
   },
@@ -52,9 +52,9 @@
       "e-waste": 0
     },
     "glass": {
-      "plastic": 1,
+      "plastic": 0,
       "paper": 0,
-      "glass": 2,
+      "glass": 3,
       "metal": 0,
       "organic": 0,
       "e-waste": 0
@@ -68,20 +68,20 @@
       "e-waste": 0
     },
     "organic": {
-      "plastic": 1,
+      "plastic": 0,
       "paper": 0,
       "glass": 0,
       "metal": 0,
-      "organic": 4,
+      "organic": 5,
       "e-waste": 0
     },
     "e-waste": {
-      "plastic": 1,
+      "plastic": 0,
       "paper": 0,
       "glass": 0,
       "metal": 0,
       "organic": 0,
-      "e-waste": 4
+      "e-waste": 5
     }
   }
 }
