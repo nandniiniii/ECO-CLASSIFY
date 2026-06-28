@@ -58,5 +58,4 @@ eco-classify
 
 - Fine-tune the image model on a real waste dataset
 - Add user accounts so impact stats are personalized
-- Deploy the backend and frontend properly (Render/Vercel/Atlas)
 - Add tests
