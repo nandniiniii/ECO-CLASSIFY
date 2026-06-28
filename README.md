@@ -1,4 +1,4 @@
-*Live demo:* https://eco-classify-delta.vercel.app
+> Live at: https://eco-classify-delta.vercel.app
 
 
 Eco-Classiffy--->
