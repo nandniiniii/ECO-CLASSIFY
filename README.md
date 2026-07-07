@@ -8,11 +8,10 @@ I built this because I was tired of standing in front of my trash cans holding a
 
 ## So what does it actually do?
 
-- **Snap a pic** of whatever you're trying to throw away and it'll sort it into one of 6 buckets: plastic, paper, glass, metal, organic, or e-waste
-- Don't feel like taking a photo? Just type it out — "broken phone charger," "banana peel," whatever — and it'll classify that too
-- There's an **impact tracker** that adds up the carbon saved, energy saved, and waste diverted across everything you've classified so far
-- It'll point you toward **recycling centers near you** depending on the category
-- A **Learn page** if you just want the cheat-sheet version of how to deal with each type of waste
+- **Snap a pic** of whatever you're trying to throw away and it'll sort it into one of 6 buckets: plastic, paper, glass, metal, organic, or e-waste.
+- Don't feel like taking a photo? Just type it out — "broken phone charger," "banana peel," whatever — and it'll classify that too.
+- There's an **impact tracker** that adds up the carbon saved, energy saved, and waste diverted across everything you've classified so far.
+- A **Learn page** if you just want the cheat-sheet version of how to deal with each type of waste.
 
 ## Why these tools
 
