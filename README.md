@@ -1,33 +1,29 @@
-# Eco-Classify
+#  Eco-Classify
 
-**AI-powered waste classification platform** that helps people figure out how to properly dispose of and recycle their waste. Upload a photo or describe an item in text, and it tells you the category, how to dispose of it, and what its environmental impact looks like.
+I built this because I was tired of standing in front of my trash cans holding a broken phone charger, having zero idea which bin it belonged in. Eco-Classify is my attempt at fixing that — snap a photo or just type what the item is, and it tells you what category it falls under, how to actually get rid of it, and roughly what impact that has environmentally.
 
-🔗 **Live Demo:** [eco-classify-delta.vercel.app](https://eco-classify-delta.vercel.app)
-
----
-
-## What It Does
-
--  **Image classification** — Upload a photo of waste and get it classified into one of 6 categories: `plastic`, `paper`, `glass`, `metal`, `organic`, or `e-waste`
--  **Text classification** — Type a description instead (e.g. *"broken phone charger"*) and get the same classification
--  **Environmental impact tracking** — See the carbon saved, energy saved, and waste diverted from everything you've classified
--  **Nearby recycling centers** — Find disposal locations based on category and your location
--  **Learn page** — Quick reference guide on how to properly handle each waste category
+🔗 **Live:** [eco-classify-delta.vercel.app](https://eco-classify-delta.vercel.app)
 
 ---
 
-## Tech Stack
+## So what does it actually do?
 
-| Layer | Technology |
-|---|---|
-| **Frontend** | React, Tailwind CSS, Vite |
-| **Backend** | Flask (Python), REST APIs |
-| **Database** | MongoDB |
-| **ML** | PyTorch, MobileNetV2 (pretrained on ImageNet, used as a transfer-learning backbone) |
+- **Snap a pic** of whatever you're trying to throw away and it'll sort it into one of 6 buckets: plastic, paper, glass, metal, organic, or e-waste
+- Don't feel like taking a photo? Just type it out — "broken phone charger," "banana peel," whatever — and it'll classify that too
+- There's an **impact tracker** that adds up the carbon saved, energy saved, and waste diverted across everything you've classified so far
+- It'll point you toward **recycling centers near you** depending on the category
+- A **Learn page** if you just want the cheat-sheet version of how to deal with each type of waste
 
----
+## Why these tools
 
-## Project Structure
+Nothing fancy here, just stuff that made sense for the problem:
+
+- **Frontend** — React + Tailwind, built with Vite because I didn't want to wait around for slow builds
+- **Backend** — Flask, kept it simple with REST endpoints
+- **Database** — MongoDB for storing classification history and impact stats
+- **ML** — PyTorch, using MobileNetV2 pretrained on ImageNet as the backbone and fine-tuning on top of that for the actual waste categories
+
+## How it's laid out
 
 ```
 eco-classify
@@ -43,25 +39,22 @@ eco-classify
 │       └── db.py          MongoDB connection layer
 ```
 
----
+## API endpoints, if you're poking around
 
-## API Endpoints
-
-| Method | Endpoint | Description |
+| Method | Endpoint | What it does |
 |---|---|---|
 | `POST` | `/predict-image` | Classify a waste image |
 | `POST` | `/predict-text` | Classify a text description |
-| `GET` | `/impact` | Get aggregated environmental impact stats |
-
----
+| `GET` | `/impact` | Pull aggregated environmental impact stats |
 
 
----
+## What I still want to fix / add
 
-## Roadmap
+Honestly this is more of a working prototype than a finished product. Things on my list:
 
-- [ ] Fine-tune the image model on a real waste dataset
-- [ ] Add user accounts so impact stats are personalized
-- [ ] Add tests
+- [ ] Fine-tune the model on an actual waste dataset instead of leaning entirely on ImageNet transfer learning
+- [ ] Add real user accounts so the impact stats mean something over time instead of resetting per session
+- [ ] Write actual tests (I know, I know)
 
----
+If you find bugs or have ideas, feel free to open an issue — this is still very much a work in progress.
+
